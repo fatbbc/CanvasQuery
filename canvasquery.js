@@ -361,9 +361,9 @@
     },
 
     color: function() {
-      var result = new cq.Color();
-      result.parse(arguments[0], arguments[1]);
-      return result;
+      
+      return (new cq.Color()).parse(arguments[0], arguments[1]);
+      
     },
 
     poolArray: [],
