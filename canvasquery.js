@@ -992,11 +992,10 @@
       var sourceData = this.context.getImageData(0, 0, this.canvas.width, this.canvas.height);
       var sourcePixels = sourceData.data;
 
-      var mode = typeof mask[0] === "boolean" ? "bool" : "byte";
-
       for (var i = 0, len = sourcePixels.length; i < len; i += 4) {
-        var value = mask[i / 4];
-        sourcePixels[i + 3] = value * 255 | 0;
+        
+        sourcePixels[i + 3] = mask[i >> 4] * 255 | 0;
+        
       }
 
       this.context.putImageData(sourceData, 0, 0);
