@@ -1013,20 +1013,19 @@
       var color = cq.color(arguments[1]);
       if (colorMode === "gradient") colorB = cq.color(arguments[2]);
 
-      for (var i = 0, len = sourcePixels.length; i < len; i += 4) {
-        var value = mask[i / 4];
-
-        if (maskType === "byte") value /= 255;
+      for (var i = 0, len = sourcePixels.length, value = 0, mult = maskType === "byte" ? 1/255 : 1; i < len; i += 4) {
+        
+        value = mask[i >> 2] * mult;
 
         if (colorMode === "normal") {
           if (value) {
-            sourcePixels[i + 0] = color[0] | 0;
+            sourcePixels[i    ] = color[0] | 0;
             sourcePixels[i + 1] = color[1] | 0;
             sourcePixels[i + 2] = color[2] | 0;
             sourcePixels[i + 3] = value * 255 | 0;
           }
         } else {
-          sourcePixels[i + 0] = color[0] + (colorB[0] - color[0]) * value | 0;
+          sourcePixels[i    ] = color[0] + (colorB[0] - color[0]) * value | 0;
           sourcePixels[i + 1] = color[1] + (colorB[1] - color[1]) * value | 0;
           sourcePixels[i + 2] = color[2] + (colorB[2] - color[2]) * value | 0;
           sourcePixels[i + 3] = 255;
