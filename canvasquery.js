@@ -994,7 +994,7 @@
 
       for (var i = 0, len = sourcePixels.length; i < len; i += 4) {
         
-        sourcePixels[i + 3] = mask[i >> 4] * 255 | 0;
+        sourcePixels[i + 3] = mask[i >> 2] * 255 | 0;
         
       }
 
